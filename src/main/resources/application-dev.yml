@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=Condominio_aspnet;encrypt=false;trustServerCertificate=true
+    username: sa
+    password: Senh@Forte2026!
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  config:
+    activate:
+      on-profile: dev
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: 'admin_geral'
+    password: 'Senh@Forte2026!'
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: true
+
+logging:
+  level:
+    root: INFO
+
+management:
+  endpoint:
+    health:
+      show-details: always
+
+app:
+  jwt:
+    key: SuaChaveSecretaMuitoLongaESeguraAqui2026!
+    issuer: CondominioSaaS
+    audience: CondominioSaaS
+    expireMinutes: 60
+  docs:
+    open-browser: true
