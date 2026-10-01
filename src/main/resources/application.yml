@@ -32,6 +32,9 @@ management:
       show-details: ${MANAGEMENT_ENDPOINT_HEALTH_SHOWDETAILS:never}
 
 app:
+  database:
+    name: ${APP_DATABASE_NAME:Condominio_aspnet}
+    create-if-missing: ${APP_DATABASE_CREATE_IF_MISSING:true}
   jwt:
     secret: ${APP_JWT_KEY}
     issuer: ${APP_JWT_ISSUER}
