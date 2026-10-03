@@ -1,5 +1,5 @@
 server:
-  port: ${JAVA_CONTAINER_PORT:8081}
+  port: ${CONTAINER_PORT:8081}
 
 spring:
   profiles:
@@ -19,6 +19,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+      naming:
+        physical-strategy: com.condominiosaas.config.TablePreservingPhysicalNamingStrategy
     show-sql: false
     open-in-view: false
 

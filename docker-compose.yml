@@ -9,9 +9,9 @@ services:
     container_name: CondominioSaaS-java
     restart: unless-stopped
     ports:
-      - "${JAVA_HOST_PORT}:${JAVA_CONTAINER_PORT}"
+      - "${HOST_PORT}:${CONTAINER_PORT}"
     env_file:
-      - .env.prod
+      - .env
     environment:
       # Profile Ativo
       - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
@@ -39,7 +39,7 @@ services:
       - MANAGEMENT_ENDPOINT_HEALTH_SHOWDETAILS=${MANAGEMENT_ENDPOINT_HEALTH_SHOWDETAILS}
 
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:${JAVA_CONTAINER_PORT}/actuator/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:${CONTAINER_PORT}/actuator/health || exit 1"]
       interval: 30s
       timeout: 5s
       retries: 3

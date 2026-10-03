@@ -97,6 +97,7 @@ public class AuthController {
 	}
 
 	@PostMapping("/definir-senha-permanente")
+	@PreAuthorize("@securityPolicies.permitirTrocaSenha(authentication)")
 	public ResponseEntity<?> definirSenha(@RequestBody DefinirSenhaRequest request) {
 		var auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth == null || !auth.isAuthenticated())
@@ -105,21 +106,7 @@ public class AuthController {
 
 		String username = auth.getName();
 
-		// validar claim primeiroAcesso == "true"
-		Object details = auth.getDetails();
-		String primeiroAcesso = "false";
-		if (details instanceof io.jsonwebtoken.Claims claims) {
-			primeiroAcesso = claims.get("primeiroAcesso", String.class);
-		} else if (details instanceof Map<?, ?> map) {
-			Object valor = map.get("primeiroAcesso");
-			primeiroAcesso = valor != null ? valor.toString() : "false";
-		}
-
-		if (!"true".equals(primeiroAcesso))
-			return ResponseEntity.status(403)
-				.body(Map.of("sucesso", false, "erro", "A troca de senha não é permitida."));
-
-		boolean ok = authService.definirSenhaPermanente(username, request.novaSenha);
+		boolean ok = authService.definirSenhaPermanente(username, request.NovaSenha);
 		return ok ? ResponseEntity.ok(Map.of("sucesso", true)) : ResponseEntity.badRequest()
 			.body(Map.of("sucesso", false, "erro", "Falha ao definir senha."));
 	}
@@ -131,5 +118,5 @@ class AuthLoginRequest {
 }
 
 class DefinirSenhaRequest {
-	public String novaSenha;
+	public String NovaSenha;
 }

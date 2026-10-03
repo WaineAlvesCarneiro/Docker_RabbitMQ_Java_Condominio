@@ -9,6 +9,7 @@ import com.condominiosaas.domain.enums.TipoEmpresaAtivo;
 import com.condominiosaas.domain.enums.TipoRole;
 import com.condominiosaas.domain.enums.TipoUserAtivo;
 import com.condominiosaas.security.SecurityPolicies;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,25 +40,25 @@ public class EnumsController {
 	}
 
 	@GetMapping("/tipo-condominio")
-	@org.springframework.security.access.prepost.PreAuthorize("@securityPolicies.isAdminPolicy(authentication)")
+	@PreAuthorize("@securityPolicies.isAdminPolicy(authentication)")
 	public ResponseEntity<?> getTipoCondominio() {
 		return ResponseEntity.ok(toOptions(TipoCondominio.class));
 	}
 
 	@GetMapping("/tipo-role")
-	@org.springframework.security.access.prepost.PreAuthorize("@securityPolicies.isAdminPolicy(authentication)")
+	@PreAuthorize("@securityPolicies.isAdminPolicy(authentication)")
 	public ResponseEntity<?> getTipoRole() {
 		return ResponseEntity.ok(toOptions(TipoRole.class));
 	}
 
 	@GetMapping("/tipo-user-ativo")
-	@org.springframework.security.access.prepost.PreAuthorize("@securityPolicies.isAdminPolicy(authentication)")
+	@PreAuthorize("@securityPolicies.isAdminPolicy(authentication)")
 	public ResponseEntity<?> getTipoUserAtivo() {
 		return ResponseEntity.ok(toOptions(TipoUserAtivo.class));
 	}
 
 	@GetMapping("/tipo-empresa-ativo")
-	@org.springframework.security.access.prepost.PreAuthorize("@securityPolicies.isAdminPolicy(authentication)")
+	@PreAuthorize("@securityPolicies.isAdminPolicy(authentication)")
 	public ResponseEntity<?> getTipoEmpresaAtivo() {
 		return ResponseEntity.ok(toOptions(TipoEmpresaAtivo.class));
 	}

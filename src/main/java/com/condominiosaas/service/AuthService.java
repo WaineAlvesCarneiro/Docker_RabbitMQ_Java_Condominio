@@ -32,8 +32,11 @@ public class AuthService {
 		// claim names must match AuthClaims constants from .NET
 		claims.put("role", user.getRole());
 		claims.put("empresaId", user.getEmpresaId() != null ? String.valueOf(user.getEmpresaId()) : null);
-		// primeiroAcesso expected as string "true"/"false"
-		claims.put("primeiroAcesso", user.getPrimeiroAcesso() != null && user.getPrimeiroAcesso() ? "true" : "false");
+
+		// Garantir que o claim seja string "true"/"false"
+		String primeiroAcessoClaim = (user.getPrimeiroAcesso() != null && user.getPrimeiroAcesso()) ? "true" : "false";
+		claims.put("primeiroAcesso", primeiroAcessoClaim);
+
 		// statusAtivo and empresaAtiva expected as string names like "Ativo"/"Inativo"
 		claims.put("statusAtivo", user.getAtivo() != null ? user.getAtivo().name() : null);
 		claims.put("empresaAtiva", user.getEmpresaAtiva() != null ? user.getEmpresaAtiva().name() : null);

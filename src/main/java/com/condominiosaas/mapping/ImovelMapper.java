@@ -3,7 +3,6 @@ package com.condominiosaas.mapping;
 import com.condominiosaas.domain.entity.Empresa;
 import com.condominiosaas.domain.entity.Imovel;
 import com.condominiosaas.dto.ImovelDto;
-import java.time.LocalDateTime;
 
 public class ImovelMapper {
 
@@ -17,8 +16,6 @@ public class ImovelMapper {
 		e.setId(req.getEmpresaId());
 		i.setEmpresa(e);
 
-		i.setDataInclusao(LocalDateTime.now());
-		i.setDataAlteracao(null);
 		return i;
 	}
 
